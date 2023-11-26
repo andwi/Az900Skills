@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZ-900 Skills measured</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<h1>AZ-900 Skills measured</h1>
+
+<div id="loader"></div>
+
+<div id="app" v-cloak>
+    <p><a :href="json?.href">{{ json?.title }}</a></p>
+    <div v-for="(section, sectionIndex) in json?.sections" :key="sectionIndex">
+        <h2>{{ section.title }}</h2>
+        <fieldset v-for="(subsection, subsectionIndex) in section.subsections" :key="subsectionIndex">
+            <legend>{{ subsection.title }}</legend>
+            <div v-for="(skill, skillIndex) in subsection.skills" :key="skillIndex">
+                <label>
+                    <input type="checkbox" v-model="skill.checked" v-bind:disabled="saving">
+                    {{ skill.name }}
+                </label>
+            </div>
+        </fieldset>
+    </div>
+    <button v-if="json?.sections" type="button" @click="saveSkills" v-bind:disabled="saving">Save</button>
+</div>
+
+<div id="snackbar"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
