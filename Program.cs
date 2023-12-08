@@ -24,6 +24,8 @@ builder.Services.AddAzureClients(clients =>
     clients.UseCredential(new DefaultAzureCredential());
 });
 
+builder.Services.AddApplicationInsightsTelemetry(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
