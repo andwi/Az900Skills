@@ -16,6 +16,10 @@ builder.Services.AddAzureClients(clients =>
     {
         clients.AddBlobServiceClient(serviceUri);
     }
+    else if (builder.Configuration["BlobConnectionString"] is string connectionString)
+    {
+        clients.AddBlobServiceClient(connectionString);
+    }
 
     clients.UseCredential(new DefaultAzureCredential());
 });
