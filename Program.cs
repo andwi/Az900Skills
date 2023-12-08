@@ -3,8 +3,8 @@ using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Azure;
 
-const string SkillsBlobContainerName = "skills";
-const string SkillsBlobName = "skills.json";
+const string SkillsContainerName = "skills";
+const string SkillsFileName = "skills.json";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,8 +39,7 @@ app.MapGet("/skills", async (ILogger<Program> logger, HttpContext httpContext) =
     {
         if (httpContext.RequestServices.GetService<BlobServiceClient>() is BlobServiceClient blobServiceClient)
         {
-            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(SkillsBlobContainerName);
-            BlobClient blobClient = containerClient.GetBlobClient(SkillsBlobName);
+            BlobClient blobClient = GetSkillsBlobClient(blobServiceClient);
 
             BlobDownloadStreamingResult streamingResult = await blobClient.DownloadStreamingAsync();
             return Results.File(streamingResult.Content, streamingResult.Details.ContentType);
@@ -51,15 +50,14 @@ app.MapGet("/skills", async (ILogger<Program> logger, HttpContext httpContext) =
         logger.LogWarning(ex, "Error fetching skills from blob storage");
     }
 
-    string path = Path.Combine(builder.Environment.ContentRootPath, SkillsBlobName);
+    string path = Path.Combine(builder.Environment.ContentRootPath, SkillsFileName);
     return Results.File(path, contentType: "application/json");
 });
 
 app.MapPost("/skills", async (HttpContext httpContext) =>
 {
     BlobServiceClient blobServiceClient = httpContext.RequestServices.GetRequiredService<BlobServiceClient>();
-    BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(SkillsBlobContainerName);
-    BlobClient blobClient = containerClient.GetBlobClient(SkillsBlobName);
+    BlobClient blobClient = GetSkillsBlobClient(blobServiceClient);
 
     await blobClient.UploadAsync(httpContext.Request.Body, new BlobUploadOptions
     {
@@ -68,3 +66,9 @@ app.MapPost("/skills", async (HttpContext httpContext) =>
 });
 
 app.Run();
+
+BlobClient GetSkillsBlobClient(BlobServiceClient blobServiceClient)
+{
+    BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(SkillsContainerName);
+    return containerClient.GetBlobClient(SkillsFileName);
+}
