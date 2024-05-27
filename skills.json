@@ -1,6 +1,6 @@
 {
-  "title": "Skills measured as of July 31, 2023",
-  "href": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-900#skills-measured-as-of-july-31-2023",
+  "title": "Skills measured as of January 23, 2024",
+  "href": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-900#skills-measured-as-of-january-23-2024",
   "sections": [
     {
       "title": "Describe cloud concepts (25-30%)",
@@ -32,7 +32,7 @@
             { "name": "Describe infrastructure as a service (IaaS)", "checked": false },
             { "name": "Describe platform as a service (PaaS)", "checked": false },
             { "name": "Describe software as a service (SaaS)", "checked": false },
-            { "name": "Identify appropriate use cases for each cloud service (IaaS, PaaS, and SaaS)", "checked": false }
+            { "name": "Identify appropriate use cases for each cloud service type (IaaS, PaaS, and SaaS)", "checked": false }
           ]
         }
       ]
@@ -80,7 +80,7 @@
             { "name": "Describe directory services in Azure, including Microsoft Entra ID and Microsoft Entra Domain Services", "checked": false },
             { "name": "Describe authentication methods in Azure, including single sign-on (SSO), multi-factor authentication (MFA), and passwordless", "checked": false },
             { "name": "Describe external identities in Azure, including business-to-business (B2B) and business-to-customer (B2C)", "checked": false },
-            { "name": "Describe Conditional Access in Microsoft Entra ID", "checked": false },
+            { "name": "Describe Microsoft Entra Conditional Access", "checked": false },
             { "name": "Describe Azure role-based access control (RBAC)", "checked": false },
             { "name": "Describe the concept of Zero Trust", "checked": false },
             { "name": "Describe the purpose of the defense-in-depth model", "checked": false },
